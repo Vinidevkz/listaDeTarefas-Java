@@ -13,16 +13,22 @@ import java.util.ArrayList;
 
 
 class Tarefas {
-
-    String nomeTarefa;
     String descTarefa;
     boolean concluida;
 
     //cria uma tarefa
-    public Tarefas(String nomeTarefa, String descTarefa){
-        this.nomeTarefa = nomeTarefa;
+    public Tarefas(String descTarefa){
         this.descTarefa = descTarefa;
         this.concluida = false;
+    }
+
+    /*Sobreescrevendo o método toString do objeto, que por padrão retorna o
+    *endereço da memória onde o mesmo está guardado. Agora ele irá retornar
+    * o conteúdo que está dentro do objeto e nao seu endereço.
+    */
+    @Override
+    public String toString(){
+        return "Tarefa: " + descTarefa;
     }
 }
 
@@ -32,31 +38,38 @@ class GerenciadorDeTarefas {
 
     public static void main(String args[]){
         int n;
+
         System.out.println();
         System.out.println("/*---Bem-Vindo(a) ao Gerenciador de Tarefas---*/");
         System.out.println();
-        System.out.println("Digite os seguintes números para as executar as ações:");
-        System.out.println("1: Adicionar uma tarefa");
-        System.out.println("2: Ver todas as tarefa");
-        System.out.println("3: Remover uma tarefa");
+        while(true){
+            System.out.println("Digite os seguintes números para as executar as ações:");
+            System.out.println("1: Adicionar uma tarefa");
+            System.out.println("2: Ver todas as tarefa");
+            System.out.println("3: Remover uma tarefa");
 
-        n = scanner.nextInt();
-        scanner.nextLine();
+            n = scanner.nextInt();
+            scanner.nextLine();
 
-        switch (n){
-            case 1:
-                criarTarefa();
-            case 2:
-                listarTarefas();
-        } while(true);
+            switch (n){
+                case 1:
+                    criarTarefa();
+                    break;
+                case 2:
+                    listarTarefas();
+                    break;
+                case 0:
+                    System.out.println("Saindo do programa...");
+                    return;
+            }
+        }
+
     }
 
     private static void criarTarefa(){
-        System.out.println("Digite o nome da tarefa:");
-        String nomeTarefa = scanner.nextLine();
         System.out.println("Digite a dexcrição da tarefa:");
         String descTarefa = scanner.nextLine();
-        listaTarefa.add(new Tarefas(nomeTarefa, descTarefa));
+        listaTarefa.add(new Tarefas(descTarefa));
         System.out.println("Tarefa criada com sucesso.");
     }
 
